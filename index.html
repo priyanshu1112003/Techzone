@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* General Reset */
     * {
       margin: 0;
       padding: 0;
@@ -33,7 +32,6 @@
       line-height: 1.6;
     }
 
-    /* Header */
     .header {
       background-color: #161b22;
       padding: 1.5rem 2rem;
@@ -43,7 +41,6 @@
       border-bottom: 2px solid #30363d;
     }
 
-    /* Glowing Logo */
     @keyframes glow {
       0% {
         text-shadow: 0 0 10px #58a6ff, 0 0 20px #58a6ff, 0 0 30px #58a6ff;
@@ -64,7 +61,6 @@
       letter-spacing: 2px;
     }
 
-    /* Navigation */
     .nav-links {
       list-style: none;
       display: flex;
@@ -82,7 +78,6 @@
       color: #58a6ff;
     }
 
-    /* Hero Section */
     .hero {
       text-align: center;
       padding: 3rem 1rem;
@@ -100,7 +95,6 @@
       color: #c9d1d9;
     }
 
-    /* Products Section */
     .products {
       padding: 2rem;
     }
@@ -159,7 +153,6 @@
       background-color: #2ea043;
     }
 
-    /* Cart Section */
     .cart {
       padding: 2rem;
       border-top: 2px solid #30363d;
@@ -200,13 +193,46 @@
       color: #c9d1d9;
     }
 
-    /* Social Media Links */
+    .order-btn, .cod-btn {
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .order-btn {
+      background-color: #238636;
+    }
+
+    .order-btn:hover {
+      background-color: #2ea043;
+    }
+
+    .cod-btn {
+      background-color: #f9a825;
+      color: #0d1117;
+      margin-left: 1rem;
+    }
+
+    .cod-btn:hover {
+      background-color: #fbc02d;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
     .social-links a {
-      color: #e6edf3;
+      color: white;
       text-decoration: none;
-      padding: 10px;
+      padding: 8px 12px;
+      border-radius: 4px;
       font-weight: bold;
-      border-radius: 5px;
       transition: background-color 0.3s;
     }
 
@@ -214,12 +240,12 @@
       background-color: #58a6ff;
     }
 
-    .linkedin-link {
-      background-color: #0077b5;
-    }
-
     .instagram-link {
       background-color: #E1306C;
+    }
+
+    .linkedin-link {
+      background-color: #0077b5;
     }
   </style>
 </head>
@@ -233,7 +259,7 @@
         <li><a href="#cart">Cart</a></li>
       </ul>
     </nav>
-    <div class="social-links" style="display: flex; gap: 10px;">
+    <div class="social-links">
       <a href="https://www.linkedin.com/in/priyanshu-rajput-49508532a" target="_blank" class="linkedin-link">LinkedIn</a>
       <a href="https://www.instagram.com/_px.iyanshu_" target="_blank" class="instagram-link">Instagram</a>
     </div>
@@ -247,6 +273,7 @@
   <section id="products" class="products">
     <h2>Popular Tech Products</h2>
     <div class="product-grid">
+
       <div class="product">
         <img src="https://www.apple.com/newsroom/images/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/article/Apple-iPhone-15-Pro-lineup-color-lineup-230912_big.jpg.large.jpg" alt="iPhone 15 Pro" />
         <h3>iPhone 15 Pro</h3>
@@ -281,29 +308,36 @@
         <p>$49</p>
         <button onclick="addToCart('USB-C Hub', 49)">Add to Cart</button>
       </div>
-
+      
       <div class="product">
         <img src="https://blog.playstation.com/tachyon/2023/10/cd56722db7b991b3d7a33f1bafd55f80d0ac553d.png?resize=1088%2C612&crop_strategy=smart.jpg" alt="Sony PS5" />
         <h3>Sony PS5</h3>
         <p>$499.99</p>
-        <button onclick="addToCart('Sony PS5', 499.99)">Add to Cart</button>
+        <button onclick="addToCart('Sony PS5',499.99)">Add to Cart</button>
       </div>
-    </div>
+
+      <div class="product">
+        <img src="https://rukminim3.flixcart.com/image/850/1000/xif0q/gamingconsole/z/i/o/1024-xbox-series-x-microsoft-yes-original-imah2mfhkrbmgahh.jpeg?q=20&crop=false.jpg" alt="Xbox series X"
+        <h3>Xbox seriesX</h3>
+        <p>$299.99</p>
+        <button onclick="addToCart('Xbox seriesX',299.99)">Add to Cart</button>
+      </div>
   </section>
 
   <section id="cart" class="cart">
     <h2>Your Cart</h2>
     <ul id="cart-items"></ul>
     <p>Total: $<span id="total">0</span></p>
+    <button class="order-btn" onclick="placeOrder()">Order Now</button>
+    <button class="cod-btn" onclick="codPayment()">Cash on Delivery</button>
   </section>
 
-  <!-- Functional Add to Cart Script with Remove Option -->
   <script>
     const cartItems = [];
     let total = 0;
 
     function addToCart(name, price) {
-      const id = Date.now() + Math.random(); // Unique ID
+      const id = Date.now() + Math.random();
       cartItems.push({ id, name, price });
       total += price;
       renderCart();
@@ -333,6 +367,28 @@
       });
 
       totalDisplay.textContent = total.toFixed(2);
+    }
+
+    function placeOrder() {
+      if (cartItems.length === 0) {
+        alert("Your cart is empty! Please add some products.");
+      } else {
+        alert("Your order has been placed successfully!");
+        cartItems.length = 0;
+        total = 0;
+        renderCart();
+      }
+    }
+
+    function codPayment() {
+      if (cartItems.length === 0) {
+        alert("Your cart is empty! Please add some products.");
+      } else {
+        alert("Your COD order has been placed successfully!");
+        cartItems.length = 0;
+        total = 0;
+        renderCart();
+      }
     }
   </script>
 </body>
