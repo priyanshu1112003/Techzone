@@ -199,6 +199,28 @@
       font-weight: bold;
       color: #c9d1d9;
     }
+
+    /* Social Media Links */
+    .social-links a {
+      color: #e6edf3;
+      text-decoration: none;
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .social-links a:hover {
+      background-color: #58a6ff;
+    }
+
+    .linkedin-link {
+      background-color: #0077b5;
+    }
+
+    .instagram-link {
+      background-color: #E1306C;
+    }
   </style>
 </head>
 <body>
@@ -211,6 +233,10 @@
         <li><a href="#cart">Cart</a></li>
       </ul>
     </nav>
+    <div class="social-links" style="display: flex; gap: 10px;">
+      <a href="https://www.linkedin.com/in/priyanshu-rajput-49508532a" target="_blank" class="linkedin-link">LinkedIn</a>
+      <a href="https://www.instagram.com/_px.iyanshu_" target="_blank" class="instagram-link">Instagram</a>
+    </div>
   </header>
 
   <section class="hero">
@@ -221,7 +247,6 @@
   <section id="products" class="products">
     <h2>Popular Tech Products</h2>
     <div class="product-grid">
-
       <div class="product">
         <img src="https://www.apple.com/newsroom/images/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/article/Apple-iPhone-15-Pro-lineup-color-lineup-230912_big.jpg.large.jpg" alt="iPhone 15 Pro" />
         <h3>iPhone 15 Pro</h3>
@@ -256,14 +281,13 @@
         <p>$49</p>
         <button onclick="addToCart('USB-C Hub', 49)">Add to Cart</button>
       </div>
-      
+
       <div class="product">
         <img src="https://blog.playstation.com/tachyon/2023/10/cd56722db7b991b3d7a33f1bafd55f80d0ac553d.png?resize=1088%2C612&crop_strategy=smart.jpg" alt="Sony PS5" />
         <h3>Sony PS5</h3>
         <p>$499.99</p>
-        <button onclick="addToCart('Sony PS5',499.99)">Add to Cart</button>
+        <button onclick="addToCart('Sony PS5', 499.99)">Add to Cart</button>
       </div>
-
     </div>
   </section>
 
