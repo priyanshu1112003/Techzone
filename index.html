@@ -2,255 +2,175 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amazon Clone - Tech Store</title>
-
-  <!-- Orbitron Tech Font -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechZone - Futuristic Tech Store</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body, h1, h2, h3, .logo {
-      font-family: 'Orbitron', sans-serif;
-    }
-
     body {
-      background-color: #0d1117;
-      background-image: url('https://www.transparenttextures.com/patterns/circuits.png');
-      background-repeat: repeat;
-      background-size: 300px 300px;
-      color: #e6edf3;
-      line-height: 1.6;
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      background: #0c0c0c;
+      overflow-x: hidden;
     }
 
-    .header {
-      background-color: #161b22;
-      padding: 1.5rem 2rem;
+    header, .cart, .products, .product, .payment-options button {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #30363d;
-    }
-
-    @keyframes glow {
-      0% {
-        text-shadow: 0 0 10px #58a6ff, 0 0 20px #58a6ff, 0 0 30px #58a6ff;
-      }
-      50% {
-        text-shadow: 0 0 20px #58a6ff, 0 0 30px #58a6ff, 0 0 40px #58a6ff;
-      }
-      100% {
-        text-shadow: 0 0 10px #58a6ff, 0 0 20px #58a6ff, 0 0 30px #58a6ff;
-      }
-    }
-
-    .logo {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #58a6ff;
-      animation: glow 2s infinite ease-in-out;
-      letter-spacing: 2px;
+      padding: 1rem 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     .nav-links {
-      list-style: none;
       display: flex;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      color: #e6edf3;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #58a6ff;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 3rem 1rem;
-      background: linear-gradient(to right, #1f2937, #111827);
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: #58a6ff;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: #c9d1d9;
-    }
-
-    .products {
-      padding: 2rem;
-    }
-
-    .products h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: #58a6ff;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      list-style: none;
       gap: 1.5rem;
     }
 
-    .product {
-      background-color: #161b22;
-      padding: 1rem;
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .cart-bubble {
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 8px;
+      font-size: 0.8rem;
+      position: absolute;
+      top: 20px;
+      right: 160px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .social-links a {
+      margin-left: 1rem;
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    .search-container input {
+      padding: 0.6rem;
+      border-radius: 5px;
       border: 1px solid #30363d;
-      border-radius: 8px;
+      width: 300px;
+      background-color: #161b22;
+      color: white;
+    }
+
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .category-filter button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #30363d;
+      color: white;
+      font-weight: bold;
+    }
+
+    .category-filter button:hover {
+      background-color: #58a6ff;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .product {
+      width: 200px;
+      padding: 1rem;
       text-align: center;
       transition: transform 0.3s;
     }
 
     .product:hover {
-      transform: translateY(-5px);
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #58a6ff;
     }
 
     .product img {
       max-width: 100%;
       height: auto;
-      border-radius: 5px;
-    }
-
-    .product h3 {
-      margin: 0.8rem 0 0.4rem;
-    }
-
-    .product p {
-      color: #c9d1d9;
-      margin-bottom: 0.6rem;
-    }
-
-    .product button {
-      background-color: #238636;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .product button:hover {
-      background-color: #2ea043;
-    }
-
-    .cart {
-      padding: 2rem;
-      border-top: 2px solid #30363d;
-    }
-
-    .cart h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #58a6ff;
-    }
-
-    #cart-items {
-      list-style: none;
-      margin-bottom: 1rem;
-    }
-
-    #cart-items li {
-      margin-bottom: 0.6rem;
-    }
-
-    .remove-btn {
-      margin-left: 10px;
-      background-color: #da3633;
-      color: white;
-      border: none;
-      padding: 2px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .remove-btn:hover {
-      background-color: #f85149;
-    }
-
-    #total {
-      font-weight: bold;
-      color: #c9d1d9;
-    }
-
-    .order-btn, .cod-btn {
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
       border-radius: 8px;
-      font-size: 1.2rem;
-      cursor: pointer;
+    }
+
+    .payment-options {
       margin-top: 1rem;
-      transition: background-color 0.3s;
-    }
-
-    .order-btn {
-      background-color: #238636;
-    }
-
-    .order-btn:hover {
-      background-color: #2ea043;
-    }
-
-    .cod-btn {
-      background-color: #f9a825;
-      color: #0d1117;
-      margin-left: 1rem;
-    }
-
-    .cod-btn:hover {
-      background-color: #fbc02d;
-    }
-
-    .social-links {
       display: flex;
-      gap: 10px;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .social-links a {
+    .payment-options button {
+      background-color: #0366d6;
       color: white;
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-weight: bold;
-      transition: background-color 0.3s;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .social-links a:hover {
-      background-color: #58a6ff;
+    .payment-options button:hover {
+      background-color: #2188ff;
+      box-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 30px #0ff;
     }
 
-    .instagram-link {
-      background-color: #E1306C;
-    }
-
-    .linkedin-link {
-      background-color: #0077b5;
+    #loader {
+      height: 100vh;
+      width: 100%;
+      background: black;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
 <body>
-  <header class="header">
+  <!-- Lottie Loader -->
+  <div id="loader"></div>
+
+  <!-- Header -->
+  <header>
     <div class="logo">TechZone</div>
     <nav>
       <ul class="nav-links">
@@ -259,80 +179,162 @@
         <li><a href="#cart">Cart</a></li>
       </ul>
     </nav>
+    <div class="cart-bubble" id="cart-count">0</div>
     <div class="social-links">
-      <a href="https://www.linkedin.com/in/priyanshu-rajput-49508532a" target="_blank" class="linkedin-link">LinkedIn</a>
-      <a href="https://www.instagram.com/_px.iyanshu_" target="_blank" class="instagram-link">Instagram</a>
+      <a href="https://www.linkedin.com/in/priyanshu-rajput-49508532a" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/_px.iyanshu_" target="_blank">Instagram</a>
     </div>
   </header>
 
-  <section class="hero">
-    <h1>Welcome to TechZone</h1>
-    <p>Shop the latest and greatest in tech!</p>
-  </section>
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search for tech products..." />
+  </div>
 
+  <!-- Filters -->
+  <div class="category-filter">
+    <button onclick="filterByCategory('All')">All</button>
+    <button onclick="filterByCategory('Phone')">Phones</button>
+    <button onclick="filterByCategory('Laptop')">Laptops</button>
+    <button onclick="filterByCategory('Audio')">Audio</button>
+    <button onclick="filterByCategory('Gaming')">Gaming</button>
+    <button onclick="filterByCategory('Accessory')">Accessories</button>
+    <button onclick="filterByCategory('Watch')">Watches</button>
+  </div>
+
+  <!-- Products -->
   <section id="products" class="products">
     <h2>Popular Tech Products</h2>
-    <div class="product-grid">
-
-      <div class="product">
-        <img src="https://www.apple.com/newsroom/images/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/article/Apple-iPhone-15-Pro-lineup-color-lineup-230912_big.jpg.large.jpg" alt="iPhone 15 Pro" />
+    <div class="product-grid" id="product-grid">
+      <!-- Product Cards (Add yours here) -->
+      <div class="product" data-category="Phone">
+        <img src="https://m.media-amazon.com/images/I/81dT7CUY6GL._AC_UF1000,1000_QL80_.jpg.jpg" alt="iPhone 15 Pro" />
         <h3>iPhone 15 Pro</h3>
         <p>$1199</p>
         <button onclick="addToCart('iPhone 15 Pro', 1199)">Add to Cart</button>
       </div>
-
-      <div class="product">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjJAzHTFKKdc_EbPgQcMcIKqfosq-sq1xrQ&s" alt="MacBook Air M2" />
-        <h3>MacBook Air M2</h3>
-        <p>$1299</p>
-        <button onclick="addToCart('MacBook Air M2', 1299)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="https://media.flixcar.com/webp/synd-asset/Sony-121156878-942609f36382af7dd7b2cb9a10f541ec-fmt-png-alpha.png" alt="Sony WH-1000XM5" />
-        <h3>Sony WH-1000XM5</h3>
-        <p>$349</p>
-        <button onclick="addToCart('Sony WH-1000XM5', 349)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="https://images.samsung.com/in/galaxy-watch6-classic/feature/galaxy-watch6-classic-banner-watch6-mo.jpg" alt="Galaxy Watch 6" />
-        <h3>Galaxy Watch 6</h3>
-        <p>$299</p>
-        <button onclick="addToCart('Galaxy Watch 6', 299)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="https://m.media-amazon.com/images/I/61gBtY8NSVL._AC_UF1000,1000_QL80_.jpg" alt="USB-C Hub" />
-        <h3>USB-C Hub</h3>
-        <p>$49</p>
-        <button onclick="addToCart('USB-C Hub', 49)">Add to Cart</button>
+      
+      <div class="product-grid" id="product-grid">
+        <div class="product" data-category="Laptop">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlSZkKntjhyrrhQlIsHG2-KCUSfMXa6pPtxw&s.jpg" alt="MacBook Pro" />
+          <h3>MacBook Pro M2</h3>
+          <p>$1999</p>
+          <button onclick="addToCart('MacBook Pro M2', 1999)">Add to Cart</button>
+        </div>
+      
+        <div class="product" data-category="Gaming">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtmLcFtGB9ghKbp7FSvcKA14YuWSH9lJAxQQ&s.jpg" alt="PS5" />
+          <h3>PlayStation 5</h3>
+          <p>$499</p>
+          <button onclick="addToCart('PlayStation 5', 499)">Add to Cart</button>
+        </div>
+      
+        <div class="product" data-category="Gaming">
+          <img src="https://m.media-amazon.com/images/I/61JGKhqxHxL._SL1500_.jpg" alt="Xbox Series X" />
+          <h3>Xbox Series X</h3>
+          <p>$499</p>
+          <button onclick="addToCart('Xbox Series X', 499)">Add to Cart</button>
+        </div>
+      
+        <div class="product" data-category="Audio">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM3jfMlaQCkgV-C5Yk4c9lnvN9e4sv1TEnbg&s.jpg" alt="Headphones" />
+          <h3>Noise Cancelling Headphones</h3>
+          <p>$199</p>
+          <button onclick="addToCart('Noise Cancelling Headphones', 199)">Add to Cart</button>
+        </div>
+      
+        <div class="product" data-category="Accessory">
+          <img src="https://ambraneindia.com/cdn/shop/files/ACCGZ6Q2VWVUHGC2_1_jpg.webp?v=1712208811&width=1000.jpg" alt="Charging Adaptor" />
+          <h3>Fast Charging Adaptor</h3>
+          <p>$29</p>
+          <button onclick="addToCart('Fast Charging Adaptor', 29)">Add to Cart</button>
+        </div>
+      
+        <div class="product" data-category="Phone">
+          <img src="https://m.media-amazon.com/images/I/81cHpJNr07L._AC_SL1500_.jpg" alt="Samsung Galaxy S24" />
+          <h3>Samsung Galaxy S24</h3>
+          <p>$899</p>
+          <button onclick="addToCart('Samsung Galaxy S24', 899)">Add to Cart</button>
+        </div>
+      
+        <div class="product" data-category="Accessory">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrG2ZANgnrF8LrvlP9R8DmRk4zfheU60OxeA&s.jpg" alt="Powerbank" />
+          <h3>20000mAh Powerbank</h3>
+          <p>$49</p>
+          <button onclick="addToCart('20000mAh Powerbank', 49)">Add to Cart</button>
+        </div>
+      
+        <div class="product" data-category="Gaming">
+          <img src="https://m.media-amazon.com/images/I/61-PblYntsL._AC_SL1500_.jpg" alt="Nintendo Switch" />
+          <h3>Nintendo Switch</h3>
+          <p>$299</p>
+          <button onclick="addToCart('Nintendo Switch', 299)">Add to Cart</button>
+        </div>
       </div>
       
-      <div class="product">
-        <img src="https://blog.playstation.com/tachyon/2023/10/cd56722db7b991b3d7a33f1bafd55f80d0ac553d.png?resize=1088%2C612&crop_strategy=smart.jpg" alt="Sony PS5" />
-        <h3>Sony PS5</h3>
-        <p>$499.99</p>
-        <button onclick="addToCart('Sony PS5',499.99)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="https://rukminim3.flixcart.com/image/850/1000/xif0q/gamingconsole/z/i/o/1024-xbox-series-x-microsoft-yes-original-imah2mfhkrbmgahh.jpeg?q=20&crop=false.jpg" alt="Xbox series X"
-        <h3>Xbox seriesX</h3>
-        <p>$299.99</p>
-        <button onclick="addToCart('Xbox seriesX',299.99)">Add to Cart</button>
-      </div>
+    </div>
   </section>
 
+  <!-- Cart Section -->
   <section id="cart" class="cart">
     <h2>Your Cart</h2>
     <ul id="cart-items"></ul>
     <p>Total: $<span id="total">0</span></p>
-    <button class="order-btn" onclick="placeOrder()">Order Now</button>
-    <button class="cod-btn" onclick="codPayment()">Cash on Delivery</button>
+    <div class="payment-options">
+      <button onclick="placeOrder()">Debit Card</button>
+      <button onclick="placeOrder()">UPI</button>
+      <button onclick="placeOrder()">Net Banking</button>
+      <button onclick="placeOrder()">Wallet</button>
+      <button onclick="codPayment()">Cash on Delivery</button>
+    </div>
   </section>
 
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
+    // Lottie Loader
+    lottie.loadAnimation({
+      container: document.getElementById('loader'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'https://assets4.lottiefiles.com/packages/lf20_usmfx6bp.json'
+    });
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+      }, 1000);
+    });
+
+    // Three.js 3D Background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    renderer.domElement.style.position = 'fixed';
+    renderer.domElement.style.top = 0;
+    renderer.domElement.style.zIndex = -1;
+
+    const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+    const material = new THREE.MeshStandardMaterial({ color: 0x00ffff, wireframe: true });
+    const knot = new THREE.Mesh(geometry, material);
+    scene.add(knot);
+    const light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(50, 50, 50);
+    scene.add(light);
+    camera.position.z = 50;
+    function animate() {
+      requestAnimationFrame(animate);
+      knot.rotation.x += 0.01;
+      knot.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Product Interactions
     const cartItems = [];
     let total = 0;
 
@@ -355,41 +357,61 @@
     function renderCart() {
       const cartList = document.getElementById('cart-items');
       const totalDisplay = document.getElementById('total');
+      const cartCount = document.getElementById('cart-count');
 
       cartList.innerHTML = '';
       cartItems.forEach((item) => {
         const li = document.createElement('li');
-        li.innerHTML = `
-          ${item.name} - $${item.price.toFixed(2)}
-          <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
-        `;
+        li.innerHTML = `${item.name} - $${item.price.toFixed(2)}
+          <button onclick="removeFromCart(${item.id})">Remove</button>`;
         cartList.appendChild(li);
       });
 
       totalDisplay.textContent = total.toFixed(2);
+      cartCount.textContent = cartItems.length;
     }
 
     function placeOrder() {
-      if (cartItems.length === 0) {
-        alert("Your cart is empty! Please add some products.");
-      } else {
-        alert("Your order has been placed successfully!");
-        cartItems.length = 0;
-        total = 0;
-        renderCart();
-      }
+      if (cartItems.length === 0) return alert("Your cart is empty!");
+      alert("Your payment was successful!");
+      cartItems.length = 0;
+      total = 0;
+      renderCart();
     }
 
     function codPayment() {
-      if (cartItems.length === 0) {
-        alert("Your cart is empty! Please add some products.");
-      } else {
-        alert("Your COD order has been placed successfully!");
-        cartItems.length = 0;
-        total = 0;
-        renderCart();
-      }
+      if (cartItems.length === 0) return alert("Your cart is empty!");
+      alert("Your COD order has been placed!");
+      cartItems.length = 0;
+      total = 0;
+      renderCart();
     }
+
+    function filterByCategory(category) {
+      const products = document.querySelectorAll('.product');
+      products.forEach(product => {
+        const productCategory = product.getAttribute('data-category');
+        product.style.display = category === 'All' || productCategory === category ? 'block' : 'none';
+      });
+    }
+
+    const debounce = (fn, delay) => {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), delay);
+      };
+    };
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', debounce(() => {
+      const search = searchInput.value.toLowerCase();
+      const products = document.querySelectorAll('.product');
+      products.forEach(product => {
+        const name = product.querySelector('h3').textContent.toLowerCase();
+        product.style.display = name.includes(search) ? 'block' : 'none';
+      });
+    }, 300));
   </script>
 </body>
 </html>
